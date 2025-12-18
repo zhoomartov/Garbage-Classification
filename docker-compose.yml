@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    entrypoint:
+      UVICORN_WORKERS: 2
+
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+
+  nginx:
+    build: ./nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - garbage_app
