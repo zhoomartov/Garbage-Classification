@@ -6,7 +6,7 @@ services:
     ports:
       - "8000:8000"
     restart: unless-stopped
-    entrypoint:
+    environment:
       UVICORN_WORKERS: 2
 
     healthcheck:
@@ -20,4 +20,4 @@ services:
     ports:
       - "80:80"
     depends_on:
-      - garbage_app
+      - web
