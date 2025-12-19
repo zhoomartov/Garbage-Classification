@@ -53,9 +53,9 @@ model.load_state_dict(torch.load('garbage.pth', map_location=device))
 model.to(device)
 model.eval()
 
-garbage_app = FastAPI()
+app = FastAPI()
 
-@garbage_app.post('/predict/')
+@app.post('/predict/')
 async def garbage(file: UploadFile = File(...)):
     data = await file.read()
     if not data:
